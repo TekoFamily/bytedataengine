@@ -1,0 +1,999 @@
+@import url('https://fonts.googleapis.com/css2?family=cal_sans&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/**
+ * ==========================================
+ * BYTEDATA ENGINE - MASTER STYLESHEET
+ * ==========================================
+ * 
+ * TABLE OF CONTENTS:
+ * 1. Design Variables (Colors, Shadows, Borders)
+ * 2. Reset & Typography Base
+ * 3. Utility Classes (Buttons, Cards, Grid)
+ * 4. Component Styles (Navbar, Footer, Hero)
+ * 5. Page Specifics (Features, Pipeline, Architecture)
+ * 6. Animation Utilities
+ */
+
+/* -------------------------------------------------------------
+ * 1. DESIGN VARIABLES
+ * Edit here to change the global color scheme.
+ * ------------------------------------------------------------- */
+
+
+ :root {
+  /* Brand Colors */
+  --primary: #2563EB;
+  --primary-dark: #1E40AF;
+  --primary-light: #60A5FA;
+  --secondary: #0F172A;
+  --accent: #F59E0B;
+
+  /* Backgrounds */
+  --bg-page: #ffffff;
+  --bg-surface: #F8FAFC;
+  --bg-highlight: #EFF6FF;
+  --bg-info: #c4e2f0;
+  --bg-card: #ffffff;
+
+  /* Typography Colors */
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+  --text-on-info: #000000;
+
+  /* Borders & Shadows */
+  --border-light: #E2E8F0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(37, 99, 235, 0.1), 0 4px 6px -2px rgba(37, 99, 235, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] {
+  --primary: #3B82F6;
+  --primary-dark: #60A5FA;
+  --primary-light: #1E40AF;
+  --secondary: #F8FAFC;
+
+  --bg-page: #0F172A;
+  --bg-surface: #1E293B;
+  --bg-highlight: rgba(59, 130, 246, 0.15);
+  --bg-info: #1e3a8a;
+  --bg-card: #1E293B;
+
+  --text-main: #F1F5F9;
+  --text-muted: #94A3B8;
+  --text-on-info: #ffffff;
+
+  --border-light: #334155;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+/* -------------------------------------------------------------
+ * 2. RESET & TYPOGRAPHY BASE
+ * ------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Background Grid Pattern */
+.bg-grid {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 800px;
+  z-index: -1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--secondary);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+p {
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------------
+ * 3. UTILITY CLASSES (Buttons, Cards)
+ * ------------------------------------------------------------- */
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  gap: 0.5rem;
+  border: none;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+}
+
+.btn-outline {
+  background: var(--bg-card);
+  /* Changed from white */
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Cards */
+.feature-card,
+.card {
+  background: var(--bg-card);
+  /* Changed from white */
+  border: 1px solid var(--border-light);
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.feature-card h3,
+.card h3 {
+  color: var(--secondary);
+}
+
+.feature-card:hover,
+.card:hover {
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.card-icon {
+  width: 3rem;
+  height: 3rem;
+  background: var(--bg-highlight);
+  /* Changed from #EFF6FF */
+  color: var(--primary);
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* -------------------------------------------------------------
+ * 4. COMPONENT STYLES (Navbar, Footer, Hero)
+ * ------------------------------------------------------------- */
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg-page);
+  /* Changed from rgba(255, 255, 255, 0.9) */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-light);
+  padding: 1rem;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--secondary);
+  /* Changed from #0F172A */
+  letter-spacing: -0.02em;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--secondary);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.nav-link:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-page);
+    /* Changed from white */
+    flex-direction: column;
+    padding: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-light);
+  padding: 4rem 1.5rem;
+  background: var(--bg-card);
+  /* Changed from white */
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+}
+
+.footer-links-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.link-col h4 {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  color: var(--secondary);
+}
+
+.link-col a {
+  display: block;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-links-group {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Hero Section */
+.hero-section {
+  padding: 8rem 1.5rem 4rem;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.badge-new {
+  display: inline-block;
+  background: var(--bg-highlight);
+  /* Changed from #EFF6FF */
+  color: var(--primary);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  margin-top: 2rem;
+}
+
+.hero-system-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--shadow-xl);
+  display: block;
+  margin: 0 auto;
+}
+
+/* Dashboard Mockup - The central visual of the hero */
+.dashboard-mockup {
+  background: var(--bg-card);
+  /* Changed from white */
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-xl);
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.mockup-header {
+  background: var(--bg-surface);
+  /* Changed from #F1F5F9 */
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.window-dot.red {
+  background: #EF4444;
+}
+
+.window-dot.yellow {
+  background: #F59E0B;
+}
+
+.window-dot.green {
+  background: #10B981;
+}
+
+.address-bar {
+  background: var(--bg-card);
+  /* Changed from white */
+  padding: 0.25rem 1rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex: 1;
+  margin-left: 1rem;
+  text-align: left;
+}
+
+/* Simple Table (inside mockup) */
+.simple-table {
+  padding: 0;
+}
+
+.st-head,
+.st-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.st-head {
+  background: #FAFAFA;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.tag-success {
+  color: #10B981;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.tag-process {
+  color: #F59E0B;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+
+/* -------------------------------------------------------------
+ * 5. PAGE SPECIFICS (Features, Pipeline, Architecture)
+ * ------------------------------------------------------------- */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-section,
+.pipeline-section {
+  padding: 4rem 1.5rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Pipeline Visualization */
+.pipeline-section {
+  background: var(--bg-surface);
+  /* Changed from #F8FAFC */
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pipeline-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.p-step {
+  background: var(--bg-card);
+  /* Changed from white */
+  border: 1px solid var(--border-light);
+  padding: 1.5rem;
+  border-radius: 8px;
+  min-width: 140px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  position: relative;
+}
+
+.p-step h4 {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  color: var(--secondary);
+  /* Added explicit color */
+}
+
+.step-num {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.p-step.active {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.p-line {
+  width: 40px;
+  height: 2px;
+  background: var(--border-light);
+}
+
+@media (max-width: 640px) {
+  .pipeline-steps {
+    flex-direction: column;
+  }
+
+  .p-line {
+    width: 2px;
+    height: 30px;
+  }
+}
+
+/* Architecture Page */
+.page-section {
+  padding: 6rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.arch-box {
+  padding: 1rem 2rem;
+  background: var(--bg-card);
+  /* Changed from white */
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-main);
+  /* Added text color */
+}
+
+.arch-box.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary-dark);
+}
+
+.arch-arrow {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+/* -------------------------------------------------------------
+ * 6. ANIMATION UTILITIES
+ * ------------------------------------------------------------- */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 7. TECHNICAL PAGE STYLES (Added Dynamically) */
+.arch-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.arch-node {
+  background: var(--bg-card);
+  /* Changed from white */
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-width: 160px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.arch-node:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.arch-node strong {
+  display: block;
+  color: var(--secondary);
+  font-size: 0.95rem;
+}
+
+.node-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  /* Changed from #F1F5F9 */
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.node-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.arch-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.conn-line {
+  width: 60px;
+  height: 2px;
+  background: var(--text-muted);
+  opacity: 0.3;
+  margin: 4px 0;
+}
+
+.conn-arrow {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+/* Engine Core Group */
+.arch-group {
+  border: 2px dashed var(--border-light);
+  /* Changed from #CBD5E1 */
+  padding: 2rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  /* Very subtle overlay, works on both modes */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.group-label {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--border-light);
+  /* Changed from #CBD5E1 */
+  color: var(--text-muted);
+  /* Changed from #475569 */
+  padding: 2px 10px;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.arch-mini-flow {
+  color: #CBD5E1;
+  font-size: 1.2rem;
+}
+
+.arch-node-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.arch-node.consumer {
+  min-width: 140px;
+  padding: 1rem;
+  flex-direction: row;
+  text-align: left;
+}
+
+.arch-node.consumer.pbi {
+  border-left: 4px solid #F59E0B;
+}
+
+
+.layer-card {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 2rem;
+  padding: 3rem;
+  border-radius: 1rem;
+  align-items: start;
+  background: var(--bg-card);
+  /* Default */
+  border: 1px solid var(--border-light);
+  /* Default */
+}
+
+.layer-card.highlight {
+  background: var(--bg-highlight);
+  border-color: var(--primary);
+}
+
+.layer-number {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--border-light);
+}
+
+.layer-card.highlight .layer-number {
+  color: var(--primary);
+}
+
+.layer-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--secondary);
+}
+
+.layer-card.highlight .layer-title {
+  color: var(--primary-dark);
+}
+
+/* Fix highlight title color in dark mode since primary-dark might be hard to read on dark bg? 
+   Actually primary-dark is #1E40AF (dark blue). On dark bg (#0F172A), that's bad contrast.
+   Let's use just primary color for title in highlight card in dark mode.
+*/
+[data-theme="dark"] .layer-card.highlight .layer-title {
+  color: var(--primary);
+}
+
+.layer-specs {
+  background: var(--bg-surface);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-light);
+}
+
+.layer-card.highlight .layer-specs {
+  background: var(--bg-card);
+}
+
+.info-section {
+  margin-top: 8rem;
+  padding: 4rem;
+  background: var(--bg-info);
+  border-radius: 1.5rem;
+  color: var(--text-on-info);
+}
+
+.info-section h3 {
+  color: var(--text-on-info);
+  /* Force inherit */
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.ops-step-text {
+  color: var(--text-on-info);
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.arch-diagram-container {
+  background: var(--bg-surface) !important;
+  /* Override inline style */
+}
+
+.btn-theme-toggle {
+  background: none;
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+  margin-left: 1rem;
+}
+
+.btn-theme-toggle:hover {
+  background: var(--bg-surface);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+
+@media (max-width: 1000px) {
+  .arch-flow {
+    flex-direction: column;
+  }
+
+  .conn-line {
+    width: 2px;
+    height: 40px;
+  }
+
+  .arch-group {
+    width: 100%;
+  }
+
+  .layer-card {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Carousel / Slider Styles */
+.carousel-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 2rem 0;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.carousel-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.carousel-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--bg-surface);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border-light);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.carousel-dot.active {
+  background: var(--primary);
+  width: 20px;
+  border-radius: 99px;
+}
+
+/* Operational Flow Styles */
+.ops-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ops-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--bg-card);
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.ops-step:hover {
+  transform: translateX(10px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-light);
+}
+
+.ops-step-number {
+  width: 50px;
+  height: 50px;
+  background: var(--bg-highlight);
+  color: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.ops-step-content {
+  color: var(--text-main);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.ops-step-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-top: 0.25rem;
+}

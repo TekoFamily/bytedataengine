@@ -1,0 +1,147 @@
+/* LeadModal.css */
+
+.lead-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 15, 25, 0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lead-modal-content {
+  background: linear-gradient(180deg, #0f172a, #020617);
+  padding: 2.5rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  animation: fadeInModal 0.3s ease-out;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lead-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.lead-modal-close:hover {
+  color: #fff;
+}
+
+.lead-modal-header {
+  margin-bottom: 2rem;
+}
+
+.lead-modal-badge {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+}
+
+.lead-modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.lead-modal-subtitle {
+  font-size: 0.95rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.lead-modal-field {
+  margin-bottom: 1.2rem;
+}
+
+.lead-modal-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
+
+.lead-modal-input {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 10px;
+  border: 1px solid #1e293b;
+  background: #020617;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.lead-modal-input:focus {
+  border-color: #3b82f6;
+}
+
+.lead-modal-button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.9rem;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+}
+
+.lead-modal-button:hover {
+  opacity: 0.9;
+}
+
+.lead-modal-button:active {
+  transform: scale(0.98);
+}
+
+.lead-modal-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.lead-modal-success {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.lead-modal-secondary-button {
+  margin-top: 1.5rem;
+  background: transparent;
+  border: 1px solid #334155;
+  color: #cbd5f5;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lead-modal-secondary-button:hover {
+  border-color: #94a3b8;
+  color: #fff;
+}
