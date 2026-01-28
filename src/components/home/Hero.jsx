@@ -1,75 +1,46 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LeadModal from './LeadModal';
+import './Hero.css';
 
 const Hero = () => {
   const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('aos-animate');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('[data-aos]').forEach(el =>
-      observer.observe(el)
-    );
-  }, []);
-
   return (
     <>
       <section className="hero-section">
-        <div
-          className="badge-new"
-          style={{
-            background: 'var(--accent)',
-            color: 'white',
-            letterSpacing: '0.05em'
-          }}
-        >
+        <div className="hero-badge-new">
           NOVO: ENTERPRISE DATA ENGINE
         </div>
 
-        <h1 className="hero-title" data-aos>
+        <h1 className="hero-title">
           Transforme Dados Brutos em Decisões de Negócio — Sem Quebrar o BI.
         </h1>
 
-        <p
-          className="hero-lead"
-          data-aos
-          style={{ maxWidth: '800px', margin: '1.5rem auto' }}
-        >
+        <p className="hero-lead">
           Elimine o caos de planilhas e scripts frágeis. O ByteData Engine
           centraliza a ingestão, garante a governança e serve dados prontos para o
           Power BI, devolvendo a autonomia para o seu negócio.
         </p>
 
-        <div className="hero-actions" data-aos>
-          <Link
-            to="/arquitetura"
-            className="btn btn-primary"
-            style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}
+        <div className="hero-actions">
+          <button
+            className="hero-btn hero-btn-primary"
+            onClick={() => setOpenModal(true)}
           >
             Ver Demonstração Enterprise
-          </Link>
+          </button>
 
           <button
-            className="btn btn-outline"
-            style={{ padding: '1rem 2rem', fontSize: '1.1rem' }}
+            className="hero-btn hero-btn-outline"
             onClick={() => setOpenModal(true)}
           >
             Falar com Especialista
           </button>
         </div>
 
-        <div style={{ marginTop: '4rem' }}>
-          <span className="address-bar" style={{ display: 'none' }}></span>
+        <div className="hero-visual-container">
           <img
             src="/sistema.png"
             alt="Dashboard do Sistema - Visão Enterprise"

@@ -1,0 +1,323 @@
+/* ArchitectureDiagram.css */
+
+/* =========================================
+   CONTAINER & LAYOUT
+   ========================================= */
+.arch-diagram-wrapper {
+    perspective: 1000px;
+}
+
+.arch-canvas {
+    background: var(--bg-surface);
+    padding: 4rem 2rem;
+    border-radius: 24px;
+    border: 1px solid var(--border-light);
+    position: relative;
+    overflow: hidden;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: var(--shadow-xl);
+    transition: all 0.3s ease;
+}
+
+/* Background Grid Animation */
+.arch-grid-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background-size: 50px 50px;
+    background-image:
+        linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+    animation: moveGrid 60s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes moveGrid {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-50px, -50px);
+    }
+}
+
+.arch-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    z-index: 2;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+    .arch-layout {
+        flex-direction: column;
+        gap: 3rem;
+    }
+}
+
+/* =========================================
+   GENERIC NODE STYLES
+   ========================================= */
+.arch-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    /* Glassmorphism subtle */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 160px;
+    position: relative;
+}
+
+.arch-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border-color: var(--primary);
+    z-index: 10;
+}
+
+/* Icon Styling */
+.arch-icon {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Text Styles */
+.arch-title {
+    font-weight: 700;
+    color: var(--secondary);
+    font-size: 0.95rem;
+    line-height: 1.2;
+}
+
+.arch-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background: var(--bg-surface);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-light);
+    font-weight: 500;
+}
+
+/* =========================================
+   COLUMN: SOURCES
+   ========================================= */
+.col-source {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+}
+
+/* Decoration for inputs */
+.arch-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* =========================================
+   COLUMN: ENGINE CORE
+   ========================================= */
+.col-engine {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.engine-container {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+    border: 2px dashed var(--primary-light);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.5s ease;
+}
+
+.engine-container:hover {
+    border-color: var(--primary);
+    background: rgba(37, 99, 235, 0.03);
+}
+
+.engine-label {
+    position: absolute;
+    top: -14px;
+    background: var(--primary);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+}
+
+/* Internal Flow Arrows in Engine */
+.engine-arrow {
+    color: var(--text-muted);
+    opacity: 0.4;
+    font-size: 1.2rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+}
+
+/* Specific Node Styles in Engine */
+.node-proc {
+    border-color: #F59E0B;
+}
+
+.node-proc:hover {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.node-raw {
+    border-color: #64748B;
+}
+
+.node-view {
+    border-color: #10B981;
+}
+
+.node-view:hover {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+
+/* =========================================
+   COLUMN: CONSUMERS
+   ========================================= */
+.col-consumers {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.consumer-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    min-width: 180px;
+    text-align: left;
+}
+
+.consumer-pbi {
+    border-left: 4px solid #F59E0B;
+}
+
+.consumer-web {
+    border-left: 4px solid #3B82F6;
+}
+
+.consumer-ext {
+    border-left: 4px solid #8B5CF6;
+}
+
+
+/* =========================================
+   CONNECTORS (The Arrows)
+   ========================================= */
+.connector-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    position: relative;
+    min-width: 120px;
+}
+
+.conn-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--bg-surface);
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    z-index: 2;
+    border: 1px solid var(--border-light);
+}
+
+.conn-line-container {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background: var(--border-light);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.conn-line-active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    background-size: 50% 100%;
+    animation: flowLine 2s linear infinite;
+}
+
+@keyframes flowLine {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.conn-arrow-head {
+    color: var(--primary);
+    margin-left: -5px;
+    font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+    .connector-wrapper {
+        transform: rotate(90deg);
+        min-width: 80px;
+        margin: 1rem 0;
+    }
+
+    .conn-label {
+        transform: rotate(-90deg);
+        margin-bottom: 1rem;
+    }
+}

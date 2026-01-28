@@ -1,0 +1,79 @@
+/* TrustSection.css */
+.trust-section {
+    padding: 6rem 1.5rem;
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-page) 100%);
+    position: relative;
+}
+
+.trust-header {
+    margin-bottom: 5rem;
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.trust-title {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.trust-subtitle {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.trust-card {
+    background: var(--bg-surface);
+    border-radius: 16px;
+    padding: 2.25rem;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.trust-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary);
+}
+
+.trust-accent-line {
+    width: 40px;
+    height: 4px;
+    background: var(--primary);
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    transition: width 0.3s ease;
+}
+
+.trust-card:hover .trust-accent-line {
+    width: 60px;
+    background: var(--primary-light);
+}
+
+.trust-card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.trust-card-desc {
+    color: var(--text-muted);
+    line-height: 1.65;
+    font-size: 1rem;
+}

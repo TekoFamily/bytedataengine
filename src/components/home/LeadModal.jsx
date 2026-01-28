@@ -34,7 +34,7 @@ const LeadModal = ({ onClose }) => {
     try {
       await emailjs.send(
         'service_qgsxrkf',      // Service ID
-        'template_fv44mcc',     // Template ID
+        'template_uadsc0r',     // Template ID
         {
           nome: form.nome,
           email: form.email,

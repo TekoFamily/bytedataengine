@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import ArchitectureDiagram from '../components/home/ArchitectureDiagram';
-import './ArchitecturePage.css';
+import './Methodology.css';
 
 const layers = [
     {
@@ -38,13 +37,7 @@ const layers = [
     }
 ];
 
-/**
- * ArchitecturePage Component
- * 
- * Displays the technical architecture of the platform.
- * Includes a visual diagram (ArchitectureDiagram) and a carousel for deep-diving into each layer.
- */
-const ArchitecturePage = () => {
+const Methodology = () => {
     const [activeSlide, setActiveSlide] = useState(0);
 
     const nextSlide = () => {
@@ -56,8 +49,7 @@ const ArchitecturePage = () => {
     };
 
     return (
-        <section className="page-section">
-            <ArchitectureDiagram />
+        <section className="methodology-section">
 
             {/* DEEP DIVE LAYERS - CAROUSEL */}
             <div className="carousel-container">
@@ -83,14 +75,58 @@ const ArchitecturePage = () => {
                     <button className="carousel-btn" onClick={nextSlide} aria-label="Next slide">&rarr;</button>
                 </div>
             </div>
+
+            {/* IMPLEMENTATION TIMELINE */}
+            <div className="timeline-section">
+                <div className="timeline-header">
+                    <h2>Roadmap de Implementação</h2>
+                    <p style={{ color: 'var(--text-muted)' }}>Ciclo típico de entrega (4-6 semanas)</p>
+                </div>
+
+                <div className="timeline-container">
+                    <TimelineStep
+                        idx="01"
+                        week="Semanas 1-2"
+                        title="Conexão & Ingestão (Setup)"
+                        desc="Configuração da VPC, conexão segura com suas fontes (ERP, CRM) e instalação dos agentes de ingestão. Em 5 dias, o dado raw já está landing no seu Data Lake."
+                    />
+                    <TimelineStep
+                        idx="02"
+                        week="Semana 3"
+                        title="Modelagem & Regras de Negócio"
+                        desc="Mapeamento das tabelas cruciais. Criamos as Views Semânticas, definimos KPIs e aplicamos a camada de governança e controle de acesso."
+                    />
+                    <TimelineStep
+                        idx="03"
+                        week="Semanas 4-5"
+                        title="Validação & Dashboards"
+                        desc="Conexão do Power BI/Tableau. Seu time valida os números. Treinamento dos key-users para Self-Service BI."
+                    />
+                    <TimelineStep
+                        idx="04"
+                        week="Semana 6+"
+                        title="Go-Live & Evolução"
+                        desc="Entrega oficial. O motor entra em piloto automático. Seu time foca apenas em criar novos insights, enquanto nós garantimos a estabilidade."
+                    />
+                </div>
+            </div>
         </section>
     );
 };
 
-/**
- * LayerDetail Sub-component
- * Renders the specific details of an architecture layer.
- */
+const TimelineStep = ({ idx, week, title, desc }) => (
+    <div className="timeline-step">
+        <div className="timeline-marker">
+            {idx}
+            <span>{week}</span>
+        </div>
+        <div className="timeline-content">
+            <h3 className="timeline-title">{title}</h3>
+            <p className="timeline-desc">{desc}</p>
+        </div>
+    </div>
+);
+
 const LayerDetail = ({ number, title, desc, specs, isHighlight }) => (
     <div className={`layer-card ${isHighlight ? 'highlight' : ''}`}>
         <div className="layer-number">{number}</div>
@@ -111,4 +147,4 @@ const LayerDetail = ({ number, title, desc, specs, isHighlight }) => (
     </div>
 );
 
-export default ArchitecturePage;
+export default Methodology;

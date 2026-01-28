@@ -1,6 +1,6 @@
-import React from 'react';
 import Hero from '../components/home/Hero';
-import ArchitecturePage from './ArchitecturePage';
+import ArchitectureDiagram from '../components/home/ArchitectureDiagram';
+import Methodology from '../components/home/Methodology';
 import Problems from '../components/home/Problems';
 // import Pipeline from '../components/home/Pipeline';
 import Features from '../components/home/Features';
@@ -11,7 +11,8 @@ const HomePage = () => {
         <>
             <Hero />
             <Problems />
-            <ArchitecturePage />
+            <ArchitectureDiagram />
+            <Methodology />
             <TrustSection />
             {/*   <Pipeline /> */}
             <Features />

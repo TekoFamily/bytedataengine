@@ -1,89 +1,107 @@
 import React from 'react';
+import './ArchitectureDiagram.css';
 
 /**
  * ArchitectureDiagram Component
  * 
  * Visual representation of the Hub & Spoke architecture data flow.
  * Displays the journey from Source (CSV/ERP) -> Enigne (MySQL) -> Output (Power BI/Web).
+ * Refactored for modern "Glassmorphism" design and animations.
  */
 const ArchitectureDiagram = () => {
     return (
-        <div className="arch-diagram-wrapper" style={{ paddingBottom: '2rem' }}>
+        <div className="arch-diagram-wrapper">
             <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
                 <h2 style={{ fontSize: '2.5rem' }}>Arquitetura Hub & Spoke</h2>
-                <p>O sistema atua como um motor intermediário que normaliza o caos antes do consumo.</p>
+                <p style={{ maxWidth: '600px', margin: '0 auto' }}>
+                    O sistema atua como um motor intermediário que normaliza o caos antes do consumo.
+                </p>
             </div>
 
-            <div className="arch-diagram-container" style={{ background: 'var(--bg-surface)', padding: '4rem 2rem', borderRadius: '1.5rem', border: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden', maxWidth: '1200px', margin: '0 auto' }}>
-                <div className="bg-grid" style={{ opacity: 0.5 }}></div>
+            <div className="arch-canvas">
+                <div className="arch-grid-bg"></div>
 
-                <div className="arch-flow">
-                    {/* Source */}
-                    <div className="arch-node consumer ext">
-                        <span className="node-icon">🔌</span>
-                        <strong>External ERP</strong>
+                <div className="arch-layout">
+
+                    {/* COLUMN 1: SOURCES */}
+                    <div className="col-source">
+                        <div className="arch-card">
+                            <span className="arch-icon">🔌</span>
+                            <span className="arch-title">External ERP</span>
+                        </div>
+                        <div className="arch-card">
+                            <span className="arch-icon">📄</span>
+                            <span className="arch-title">CSV Input</span>
+                            <span className="arch-meta">Upload Manual / API</span>
+                        </div>
                     </div>
 
-
-                    <div className="arch-node source">
-                        <span className="node-icon">📄</span>
-                        <strong>CSV Input</strong>
-                        <span className="node-meta">Upload Manual / API</span>
-                    </div>
-
-                    <div className="arch-connector">
+                    {/* CONNECTOR 1 */}
+                    <div className="connector-wrapper">
                         <span className="conn-label">JSON Stream</span>
-                        <div className="conn-line"></div>
-                        <span className="conn-arrow">►</span>
+                        <div className="conn-line-container">
+                            <div className="conn-line-active"></div>
+                        </div>
+                        <span className="conn-arrow-head">►</span>
                     </div>
 
-                    {/* ENGINE CORE */}
-                    <div className="arch-group">
-                        <div className="group-label">ENGINE CORE (MySQL)</div>
-                        <div className="arch-node engine">
-                            <span className="node-icon">⚙️</span>
-                            <strong>Stored Procedure</strong>
-                            <span className="node-meta">JSON  Table</span>
-                        </div>
-                        <div className="arch-mini-flow">
-                            <span>⬇</span>
-                        </div>
-                        <div className="arch-node db">
-                            <span className="node-icon">🗄️</span>
-                            <strong>RAW Table</strong>
-                            <span className="node-meta">Dados Brutos</span>
-                        </div>
-                        <div className="arch-mini-flow">
-                            <span>⬇</span>
-                        </div>
-                        <div className="arch-node view">
-                            <span className="node-icon">👁️</span>
-                            <strong>Smart View</strong>
-                            <span className="node-meta">Limpeza & Tipagem</span>
+                    {/* COLUMN 2: ENGINE CORE */}
+                    <div className="col-engine">
+                        <div className="engine-container">
+                            <div className="engine-label">ENGINE CORE (MySQL)</div>
+
+                            {/* Node 1: SP */}
+                            <div className="arch-card node-proc">
+                                <span className="arch-icon">⚙️</span>
+                                <span className="arch-title">Stored Procedure</span>
+                                <span className="arch-meta">JSON Table</span>
+                            </div>
+
+                            <div className="engine-arrow">⬇</div>
+
+                            {/* Node 2: RAW */}
+                            <div className="arch-card node-raw">
+                                <span className="arch-icon">🗄️</span>
+                                <span className="arch-title">RAW Table</span>
+                                <span className="arch-meta">Dados Brutos</span>
+                            </div>
+
+                            <div className="engine-arrow">⬇</div>
+
+                            {/* Node 3: View */}
+                            <div className="arch-card node-view">
+                                <span className="arch-icon">👁️</span>
+                                <span className="arch-title">Smart View</span>
+                                <span className="arch-meta">Limpeza & Tipagem</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="arch-connector">
+                    {/* CONNECTOR 2 */}
+                    <div className="connector-wrapper">
                         <span className="conn-label">REST API</span>
-                        <div className="conn-line"></div>
-                        <span className="conn-arrow">►</span>
+                        <div className="conn-line-container">
+                            <div className="conn-line-active"></div>
+                        </div>
+                        <span className="conn-arrow-head">►</span>
                     </div>
 
-                    {/* Consumers */}
-                    <div className="arch-node-stack">
-                        <div className="arch-node consumer pbi">
-                            <span className="node-icon">📊</span>
-                            <strong>Power BI</strong>
+                    {/* COLUMN 3: CONSUMERS */}
+                    <div className="col-consumers">
+                        <div className="arch-card consumer-card consumer-pbi">
+                            <span className="arch-icon">📊</span>
+                            <span className="arch-title">Power BI</span>
                         </div>
-                        <div className="arch-node consumer web">
-                            <span className="node-icon">🌐</span>
-                            <strong>Web App</strong>
+                        <div className="arch-card consumer-card consumer-web">
+                            <span className="arch-icon">🌐</span>
+                            <span className="arch-title">Web App</span>
                         </div>
-                        <div className="arch-node consumer ext">
-                            <span className="node-icon">🔌</span>
-                            <strong>External ERP</strong>
+                        <div className="arch-card consumer-card consumer-ext">
+                            <span className="arch-icon">🔌</span>
+                            <span className="arch-title">External ERP</span>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

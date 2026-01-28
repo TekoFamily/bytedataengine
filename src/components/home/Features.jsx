@@ -1,8 +1,9 @@
 import React from 'react';
+import './Features.css';
 
 const FeatureCard = ({ icon, title, desc }) => (
     <div className="feature-card">
-        <div className="card-icon">{icon}</div>
+        <div className="feature-icon-box">{icon}</div>
         <h3>{title}</h3>
         <p>{desc}</p>
     </div>
@@ -11,9 +12,9 @@ const FeatureCard = ({ icon, title, desc }) => (
 const Features = () => {
     return (
         <section id="features" className="features-section">
-            <div className="section-header">
-                <h2>Tudo o que você precisa para escalar.</h2>
-                <p>Elimine gargalos de dados sem adicionar complexidade.</p>
+            <div className="features-header">
+                <h2 className="features-title">Tudo o que você precisa para escalar.</h2>
+                <p className="features-subtitle">Elimine gargalos de dados sem adicionar complexidade.</p>
             </div>
 
             <div className="features-grid">

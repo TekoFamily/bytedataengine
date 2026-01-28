@@ -1,12 +1,13 @@
 import React from 'react';
+import './Footer.css';
 
 const Footer = () => {
     return (
         <footer className="footer">
             <div className="footer-content">
                 <div className="footer-brand">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
-                        <img src="/logo.png" alt="Logo" style={{ height: '24px' }} />
+                    <div className="footer-brand-box">
+                        <img src="/logo.png" alt="Logo" className="footer-logo" />
                         <span className="brand-title">ByteData</span>
                     </div>
                     <p className="brand-desc">Built for Data Engineers, by Data Engineers.</p>
